@@ -35,9 +35,9 @@ module.exports = function() {
 
   if (process.env.ADMIN_AUTH_PASSWORD) {
     app.use((req, res, next) => {
-      console.log(req.headers);
-      if (req.path === '/') {
-        return next();
+      // If we see a request that we think is the GLBC healthcheck, just serve 200
+      if (req.path === '/' && req.headers['user-agent'].match(/GoogleHC/)) {
+        return res.end('OK');
       }
 
       basicAuth({
