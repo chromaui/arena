@@ -34,7 +34,7 @@ module.exports = function() {
   app.use(bodyParser.json());
 
   if (process.env.ADMIN_AUTH_PASSWORD) {
-    app.use(basicAuth({ users: { admin: process.env.ADMIN_AUTH_PASSWORD } }));
+    app.use(basicAuth({ users: { admin: process.env.ADMIN_AUTH_PASSWORD }, challenge: true }));
   }
 
   return {
